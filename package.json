@@ -1,0 +1,14 @@
+{
+  "name": "Discord.js-Template",
+  "version": "1.0.0",
+  "description": "A template made by: Vako",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2"
+  }
+}
