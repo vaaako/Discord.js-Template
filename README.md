@@ -7,10 +7,10 @@ Works with discord.js `V12`, just make some little changes (I think the only cha
 - Easy to donwload and use
 - Events and Commands handler
 - Commands parameters
-	- **aliases** Command aliases
-	- **whitelistOnly** Only allowed IDs can use a command with this parameter
-	- **adminOnly** Only users with administrator role can use a command with this parameter
-	- **nsfw** Check if is a NSFW channel
+	- **aliases** - Command aliases
+	- **whitelistOnly** - Only allowed IDs can use a command with this parameter
+	- **adminOnly** - Only users with administrator role can use a command with this parameter
+	- **nsfw** - Check if is a NSFW channel
 	- Check `files/scripts/template/command.js` for more details
 - Useful functions file at `files/scripts/functions.js`
 - Multi Language support
