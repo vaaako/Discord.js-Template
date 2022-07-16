@@ -5,7 +5,8 @@ module.exports = {
 
 	// Add here yout bot's necessary permissions
 	// This is just a template
-	necessary_permissions: [
+	PERMISSIONS_INTEGER: 1523307641961,
+	NECESSARY_PERMISSIONS: [
 		// GENERAL PERMISSIONS
 		'MANAGE_CHANNELS',
 		'KICK_MEMBERS',
