@@ -3,7 +3,7 @@ const ee = require('../../config/embed.json');
 
 const { whitelistCheck, blacklistCheck } = require("../../files/scripts/memberlist-check.js");
 const { langHandler } = require('../../files/translations/langHandler.js');
-const { prefix, necessary_permissions } = require("../../config/config.js"); // loading config file with token and prefix, and settings
+const { prefix, NECESSARY_PERMISSIONS } = require("../../config/config.js"); // loading config file with token and prefix, and settings
 
 function escapeRegex(str) { // Loading all needed functions
 	return str.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`);
@@ -41,8 +41,8 @@ module.exports = async (client, message) => {
 	// If the command is now valid
 	if(command) {
 		
-		for(let i=0; i<necessary_permissions.length; i++)  {
-			let current = necessary_permissions[i];
+		for(let i=0; i<NECESSARY_PERMISSIONS.length; i++)  {
+			let current = NECESSARY_PERMISSIONS[i];
 			// Check Necessary permissions
 			if(!message.channel.permissionsFor(client.user.id).has(current))
 				return message.channel.send(LANGUAGE.noPermissions.replace('$PERM', current));
