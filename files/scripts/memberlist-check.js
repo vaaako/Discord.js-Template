@@ -1,18 +1,18 @@
-const whitelist = [
-	"123",
-	"321"
-];
+const { ALLOWED } = require('../../config/config.js');
 
-const blacklist = {
-	"123": "Ban reason"
-};
+const fs = require('fs');
+const banned = JSON.parse(fs.readFileSync('config/banned.json', 'utf-8'));
 
 module.exports = {
-	blacklistCheck: function(user) {
-		return blacklist[user] // Reason
-			? (Object.keys(blacklist).includes(user)) : false
+	bannedCheck: function(user) {
+		return (Object.keys(banned).includes(user))
+			? banned[user] : false // Reason
 	},
-	whitelistCheck: function(user) {
-		return true ? (whitelist.includes(user)) : false;
+	allowedCheck: function(user) {
+		return (ALLOWED.includes(user)) ? true : false;
+	},
+	banUser: function(user, reason) {
+		banned[user] = reason; // Add key
+		fs.writeFileSync('config/banned.json', JSON.stringify(banned, null, 1)); // Saving
 	}
 }

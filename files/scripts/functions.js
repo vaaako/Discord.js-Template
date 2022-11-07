@@ -3,24 +3,20 @@ var timeoutArray = [];
 
 
 module.exports = {
-
-	getUser: function(client, user, id=false) {
+	getUser: async function(client, user, id=false) {
+		if(!client)
+			throw new Error("You don't provided the bot client");
 		if(!user) return false;
+	
 		var user = user.replace(/[<>@&!']/g, "").replace(/ /g, '');
-
-		if(id)
-			return client.users.cache.get(user).id;
-		else
-			return client.users.cache.get(user);
+		user = await client.users.fetch(user).catch(() => { return false });
+		
+		if(user.bot) return false; //  Is bot
+		return (id) ? user.id : user;
 	},
 
 	findKey: function(obj, check) {
-		const keys = Object.keys(obj);
-
-		if(keys.includes(check))
-			return true;
-		else
-			return false;
+		return (Object.keys(obj).includes(check)) ? true : false;
 	},
 
 	timeout: function(delay, id, command, message, text){

@@ -11,7 +11,7 @@ module.exports = {
 		const msg = args.slice(1).join(" ");
 
 		user.send(msg).then(() => { 
-			message.reply("Messa sent");
+			message.reply("Message sent");
 		}).catch(() => {
 			message.channel.send("Mention a valid user");
 		});

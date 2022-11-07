@@ -21,4 +21,4 @@ Works with discord.js `V12`, just make some little changes (I think the only cha
 - Change the default values at `events/client/ready.js`
 - Change the command's messages at `files/translations`
 	- Each file need to have the same key name and amount (`"KEY": "VALUE"` - Basic JSON notation)
-	- You can easily and a new JSON language file following the rules above or totally remove the multi language method with some little changes, I know you can do wathever you want ;)
+	- You can easily and a new JSON language file following the rules above or totally remove the multi language method with some little changes, I know you can do wathever you want ;

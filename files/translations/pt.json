@@ -53,12 +53,6 @@
 				"author": "• Avatar de"
 			}
 		},
-		"calc": {
-			"description": "Está com preguiça de ter que abrir a calculadora?",
-			"noOperation": "Acho que você esquceu de... Meio que... Digitar a operação",
-			"result": "Resultado:",
-			"invalid": "Quer fazer conta com coisas que não sejam `números` ou `operadores aritméticos`? Desculpa, apenas contas pro meu nível de inteligência \n\n`+` - Adição \n`-` - Subtração \n`*` ou `x` - Multiplicação \n`/` ou `÷` - Divisão"
-		},
 		"clear": {
 			"description": "Vamos limpar esse chat sujo!",
 			"noCount": "Por favor, digite a quantidade de mensagens para eu limpar!",

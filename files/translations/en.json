@@ -53,12 +53,6 @@
 				"author": "• Avatar of"
 			}
 		},
-		"calc": {
-			"description": "Too lazy to open the calculator?",
-			"noOperation": "I think you.. Forgot to uhh... type the operation",
-			"result": "Result:",
-			"invalid": "I don't have the IQ to do math that doesn't have `numbers` or `arithmetic operators` \n\n`+` - Addition \n`-` - Subtraction \n`*` or `x` - Multiplication \n`/` ou `÷` - Division"
-		},
 		"clear": {
 			"description": "Let's clean this dirty chat!",
 			"noCount": "Please, type how many messages I need to clean",

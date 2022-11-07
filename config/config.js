@@ -3,6 +3,17 @@ module.exports = {
 	TOKEN: process.env.TOKEN,
 	prefix: "-",
 
+	//-- Dev Channels --//
+	eventChannel: "975167909968109639",
+	errorChannel: "983122973940650014",
+
+	//-- Whitelist --//
+	ALLOWED: [
+		"1234", // Member
+	],
+
+
+	//-- Bot Permissions --/
 	// Add here yout bot's necessary permissions
 	// This is just a template
 	PERMISSIONS_INTEGER: 1523307641961,

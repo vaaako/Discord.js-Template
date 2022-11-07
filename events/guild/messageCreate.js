@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const ee = require('../../config/embed.json');
 
-const { whitelistCheck, blacklistCheck } = require("../../files/scripts/memberlist-check.js");
+const { allowedCheck, bannedCheck } = require("../../files/scripts/memberlist-check.js");
 const { langHandler } = require('../../files/translations/langHandler.js');
 const { prefix, NECESSARY_PERMISSIONS } = require("../../config/config.js"); // loading config file with token and prefix, and settings
 
@@ -14,7 +14,6 @@ module.exports = async (client, message) => {
 	if(!message.guild) return; // If the message is not in a guild (aka in dms), return
 	if(message.channel.partial) await message.channel.fetch(); // If the channel is on partial fetch it
 	if(message.partial) await message.fetch(); // If the message is on partial fetch it
-
 
 
 	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`); // The prefix can be a Mention of the Bot / The defined Prefix of the Bot
@@ -37,28 +36,20 @@ module.exports = async (client, message) => {
 	
 	let command = client.commands.get(cmd); // Get the command from the collection
 	if(!command) command = client.commands.get(client.aliases.get(cmd)); // If the command does not exist, try to get it by his alias
-
+	
 	// If the command is now valid
-	if(command) {
-		
-		for(let i=0; i<NECESSARY_PERMISSIONS.length; i++)  {
-			let current = NECESSARY_PERMISSIONS[i];
-			// Check Necessary permissions
-			if(!message.channel.permissionsFor(client.user.id).has(current))
-				return message.channel.send(LANGUAGE.noPermissions.replace('$PERM', current));
-		}
-
+	if(command) { // To not check every message
 		// Check if user is banned again
-		if(blacklistCheck(message.author.id)) // Check if user is banned
-			return message.reply(LANGUAGE.banned.replace('$REASON', blacklistCheck(message.author.id)).replace('$PREFIX', prefix));
+		if(bannedCheck(message.author.id)) // Check if user is banned
+			return message.reply(LANGUAGE.banned.replace('$REASON', bannedCheck(message.author.id)).replace('$PREFIX', prefix));
 
 		// Check Whitelist
-		if(command.whitelistOnly && !whitelistCheck(message.author.id))
+		if(command.whitelistOnly && !allowedCheck(message.author.id))
 			return;
 
 		// Check if command is admin only use
-		if(command.adminOnly) { // Readable
-			if(!message.member.permissions.has('ADMINISTRATOR') && !whitelistCheck(message.author.id)) // Checking perms
+		if(command.adminOnly &&
+			!message.member.permissions.has('ADMINISTRATOR') && !allowedCheck(message.author.id)) { // Checking perms
 				return message.reply(LANGUAGE.adminOnly);
 		}
 
@@ -70,6 +61,14 @@ module.exports = async (client, message) => {
 		// Finally, run the command with the parameters: client, message, args
 		command.run(client, message, args)
 		.catch((err) => {
+			console.log(err);
+
+			for(let i=0; i<NECESSARY_PERMISSIONS.length; i++)  {
+				let current = NECESSARY_PERMISSIONS[i];
+				// Check Necessary permissions
+				if(!message.channel.permissionsFor(client.user.id).has(current))
+					return message.channel.send(LANGUAGE.noPermissions.replace('$PERM', current));
+			}
 
 			message.reply({ embeds: [ new MessageEmbed()
 				.setTitle(LANGUAGE.EMBED.ERROR.title)
@@ -77,8 +76,7 @@ module.exports = async (client, message) => {
 				.setFooter({ text: LANGUAGE.EMBED.ERROR.footer.replace('$PREFIX', prefix) })
 				.setTimestamp()
 				.setColor(ee.wrongcolor) ]});
-			console.log(err);
-			
+			console.log(err);	
 		});
 	}
 };

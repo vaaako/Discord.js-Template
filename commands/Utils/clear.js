@@ -12,7 +12,7 @@ module.exports = {
 	run: async (client, message, args) => {
 		const LANGUAGE = langHandler(message).utils.clear;
 
-		const deleteCount = parseInt(args[0], 10); // passar pra inteiro na base de 10
+		const deleteCount = parseInt(args[0], 10);
 
 		if(!deleteCount)
 			return message.reply(LANGUAGE.noCount);
